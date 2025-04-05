@@ -47,6 +47,7 @@ class ActivitiesResponse(BaseModel):
     def formatted(self) -> List[str]:
         return [court.formatted() for court in self.data if court.is_available()] if isinstance(self.data, list) else [court.formatted() for court in self.data.values() if court.is_available()]
 
+# TODO: Change this to Activity
 class CourtDuration(Enum):
     FORTY_MINUTES = 'badminton-40min'
     SIXTY_MINUTES = 'badminton-60min'
