@@ -1,7 +1,8 @@
 import requests
+import time
 
 from typing import List
-from config import BETTER_ENDPOINT, HEADERS
+from config import BETTER_ENDPOINT, HEADERS, VENUES
 from models import ActivitiesResponse, BadmintonCourt, Activity
 
 class CourtFinder:
@@ -9,13 +10,22 @@ class CourtFinder:
         self.session = requests.Session()
         self.session.headers.update(HEADERS)
 
-    def get_all_available_badminton_courts(self, date: str) -> List[BadmintonCourt]:
-        forty_minute_courts = self.get_available_courts(Activity.BADMINTON_FORTY_MINUTES, date)
-        sixty_minute_courts = self.get_available_courts(Activity.BADMINTON_SIXTY_MINUTES, date)
-        return forty_minute_courts + sixty_minute_courts
+    def get_all_available_badminton_courts_for_date(self, date: str):
+        for slug, display_name in VENUES.items():
+            courts = []
+            courts.extend(self.get_available_courts(slug, Activity.BADMINTON_FORTY_MINUTES, date))
+            courts.extend(self.get_available_courts(slug, Activity.BADMINTON_SIXTY_MINUTES, date))
+            print(f'[{display_name}]')
 
-    def get_available_courts(self, activity: Activity, date: str) -> ActivitiesResponse:
-        response = self.session.get(BETTER_ENDPOINT.format(activity), params={'date': date})
+            if courts:
+                print('\n'.join(map(str, courts)))
+            else:
+                print('No courts available')
+
+            time.sleep(1)
+
+    def get_available_courts(self, venue: str, activity: Activity, date: str) -> ActivitiesResponse:
+        response = self.session.get(BETTER_ENDPOINT.format(venue, activity), params={'date': date})
 
         if response.ok:
             data = response.json()

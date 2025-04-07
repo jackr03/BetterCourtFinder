@@ -1,8 +1,16 @@
 [api]
-better_endpoint = 'https://better-admin.org.uk/api/activities/venue/sugden-sports-centre/activity/{}/times'
+better_endpoint = 'https://better-admin.org.uk/api/activities/venue/{}/activity/{}/times'
 
 [headers]
 accept = 'application/json'
 origin = 'https://bookings.better.org.uk'
 referer = 'https://bookings.better.org.uk/'
 user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0.1 Safari/605.1.15'
+
+# TODO: Make this customisable from a CLI
+# TODO: Change name maybe
+[venues]
+sugden-sports-centre = "Sugden Sports Centre"
+ardwick-sports-hall = "Ardwick Sports Hall"
+denmark-road-sports-centre = "Denmark Road Sports Centre"
+belle-vue-sports-village = "Belle Vue Sports Village"

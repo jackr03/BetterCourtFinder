@@ -12,3 +12,4 @@ HEADERS = {
     'Referer': config['headers']['referer'],
     'User-Agent': config['headers']['user_agent'],
 }
+VENUES = config['venues']

@@ -52,6 +52,7 @@ class ActivitiesResponse(BaseModel):
             else [court for court in self.data.values() if court.is_available()]
         )
 
+# TODO: Does this need to exist?
 class Activity(Enum):
     BADMINTON_FORTY_MINUTES = 'badminton-40min'
     BADMINTON_SIXTY_MINUTES = 'badminton-60min'
